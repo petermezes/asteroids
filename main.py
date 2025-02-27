@@ -17,8 +17,13 @@ def main():
     init_log()
     pygame.init()
 
-    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     dt = 0
+
+    group_updatable = pygame.sprite.Group()
+    group_drawable = pygame.sprite.Group()
+
+    Player.containers = (group_updatable, group_drawable)
+    Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     while True:
         # loop head
@@ -27,9 +32,12 @@ def main():
                 return
 
         # loop body
-        pygame.Surface.fill(game_window, (0, 0, 0))
-        player.draw(game_window)
-        player.update(dt)
+        group_updatable.update(dt)
+
+        game_window.fill((0, 0, 0))
+
+        for group in group_updatable:
+            group.draw(game_window)
 
         # loop tail
         pygame.display.flip()

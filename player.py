@@ -4,6 +4,9 @@ from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED
 
 
 class Player(CircleShape):
+
+    containers = pygame.sprite.Group()
+
     def __init__(self, x: int, y: int):
         self.x = x
         self.y = y
